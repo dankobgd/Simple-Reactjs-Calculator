@@ -65,6 +65,40 @@ class Calculator extends Component {
   }
 
 
+  // Perform Calculation Operations
+  performOperation(nextOperator) {
+    const { displayValue, operator, value } = this.state;
+    const nextValue = parseFloat(displayValue);
+
+    const operations = {
+      '/': (prevValue, nextValue) => prevValue / nextValue,
+      '*': (prevValue, nextValue) => prevValue * nextValue,
+      '+': (prevValue, nextValue) => prevValue + nextValue,
+      '-': (prevValue, nextValue) => prevValue - nextValue,
+      '=': (prevValue, nextValue) => nextValue
+    }
+
+    if (!value) {
+      this.setState({
+        value: nextValue
+      })
+    } else if (operator) {
+      const currentValue = value || 0;
+      const computedValue = operations[operator](currentValue, nextValue)
+
+      this.setState({
+        value: computedValue,
+        displayValue: `${computedValue}`
+      })
+    }    
+
+    this.setState({
+      waitingForOperand: true,
+      operator: nextOperator
+    })
+  }
+
+
   // Clear calculator display  
   clearDisplay () {    
     this.setState({ displayValue: '0' })
@@ -91,11 +125,11 @@ class Calculator extends Component {
         <div className="key function" onClick={() => this.clearDisplay()}>C</div>
         <div className="key function" onClick={() => this.toggleSign()}>+/-</div>
         <div className="key function" onClick={() => this.percentage()}>%</div>
-        <div className="key operator">÷</div>
-        <div className="key operator">x</div>
-        <div className="key operator">-</div>
-        <div className="key operator">+</div>
-        <div className="key operator">=</div>
+        <div className="key operator" onClick={() => this.performOperation('/')}>÷</div>
+        <div className="key operator" onClick={() => this.performOperation('*')}>x</div>
+        <div className="key operator" onClick={() => this.performOperation('-')}>-</div>
+        <div className="key operator" onClick={() => this.performOperation('+')}>+</div>
+        <div className="key operator" onClick={() => this.performOperation('=')}>=</div>
       </div>
     );
   }
