@@ -6,7 +6,8 @@ class Calculator extends Component {
     displayValue: '0'
   }
 
-  // Enter Digit
+
+  // Append Digit
   inputDigit(digit) {
     const { displayValue, waitingForOperand } = this.state;
     
@@ -21,7 +22,24 @@ class Calculator extends Component {
       })
     }
   }
+
+    // Append Dot
+    inputDot() {
+      const { displayValue, waitingForOperand } = this.state;
   
+      if (waitingForOperand) {
+        this.setState({
+          displayValue: '.',
+          waitingForOperand: false
+        })
+      } else if (!displayValue.includes('.')) {
+        this.setState({
+          displayValue: `${displayValue}.`,
+          waitingForOperand: false
+        })
+      }
+    }
+
 
   render() {
     const { displayValue } = this.state;
@@ -29,7 +47,7 @@ class Calculator extends Component {
     return (
       <div className="calculator">
         <div className="display">{displayValue}</div>
-        <div className="key">●</div>        
+        <div className="key" onClick={() => this.inputDot()}>●</div>        
         <div className="key digit" onClick={() => this.inputDigit(0)}>0</div>
         <div className="key digit" onClick={() => this.inputDigit(1)}>1</div>
         <div className="key digit" onClick={() => this.inputDigit(2)}>2</div>
