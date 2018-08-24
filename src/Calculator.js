@@ -23,22 +23,29 @@ class Calculator extends Component {
     }
   }
 
-    // Append Dot
-    inputDot() {
-      const { displayValue, waitingForOperand } = this.state;
-  
-      if (waitingForOperand) {
-        this.setState({
-          displayValue: '.',
-          waitingForOperand: false
-        })
-      } else if (!displayValue.includes('.')) {
-        this.setState({
-          displayValue: `${displayValue}.`,
-          waitingForOperand: false
-        })
-      }
+
+  // Append Dot
+  inputDot() {
+    const { displayValue, waitingForOperand } = this.state;
+
+    if (waitingForOperand) {
+      this.setState({
+        displayValue: '.',
+        waitingForOperand: false
+      })
+    } else if (!displayValue.includes('.')) {
+      this.setState({
+        displayValue: `${displayValue}.`,
+        waitingForOperand: false
+      })
     }
+  }
+  
+
+  // Clear calculator display  
+  clearDisplay () {    
+    this.setState({ displayValue: '0' })
+  }
 
 
   render() {
@@ -58,7 +65,7 @@ class Calculator extends Component {
         <div className="key digit" onClick={() => this.inputDigit(7)}>7</div>
         <div className="key digit" onClick={() => this.inputDigit(8)}>8</div>
         <div className="key digit" onClick={() => this.inputDigit(9)}>9</div>
-        <div className="key function">C</div>
+        <div className="key function" onClick={() => this.clearDisplay()}>C</div>
         <div className="key function">+/-</div>
         <div className="key function">%</div>        
         <div className="key operator">÷</div>
