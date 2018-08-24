@@ -46,6 +46,21 @@ body {
   padding: 0 0.825rem;
   height: 80px;
   font-size: 40px;
+  position: relative;
+}
+
+.display .auto-scaling-text {
+  padding: 0 0.825rem;
+  transform-origin: right;
+}
+
+/* Auto resize screen numbers */
+.auto-scaling-text {
+  position: absolute;
+  display: flex;
+  right: 0;
+  top: 0;
+  line-height: 2;
 }
 
 .key {

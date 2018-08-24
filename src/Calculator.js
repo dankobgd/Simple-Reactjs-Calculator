@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AutoScalingText from './AutoScalingText';
 
 
 class Calculator extends Component {
@@ -110,7 +111,9 @@ class Calculator extends Component {
 
     return (
       <div className="calculator">
-        <div className="display">{displayValue}</div>
+        <div className="display">
+          <AutoScalingText>{displayValue}</AutoScalingText>
+        </div>
         <div className="key" onClick={() => this.inputDot()}>●</div>        
         <div className="key digit" onClick={() => this.inputDigit(0)}>0</div>
         <div className="key digit" onClick={() => this.inputDigit(1)}>1</div>
